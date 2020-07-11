@@ -1,10 +1,13 @@
 import React from 'react';
 
-
-import './app.css';
+import './app.css'
+import Todo from './todo';
 
 export default function(){
 	return (
-		<h1>Hello world</h1>
+		<div>
+			<h1>React Todo</h1>
+			<Todo />
+		</div>
 	)
 }

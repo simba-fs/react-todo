@@ -3,7 +3,7 @@ import React from 'react';
 import './lazy4.css';
 import Task from './task';
 
-export default function Tode(){
+export default function Tode(props){
 	const [todo, setTodo] = React.useState([]);
 	const [text, setText] = React.useState('');
 	/*

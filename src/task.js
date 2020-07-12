@@ -3,6 +3,9 @@ import React from 'react';
 export default function Task(props){
 	const [isEdit, setEdit] = React.useState(false);
 	const [text, setText] = React.useState(props.text);
+	React.useEffect(() => {
+		setText(props.text);
+	}, [props.text]);
 
 	function toggleEdit(){
 		if(text.length <= 0) props.remove();

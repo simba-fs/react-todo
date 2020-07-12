@@ -1,5 +1,6 @@
 import React from 'react';
 
+import './lazy4.css';
 import Task from './task';
 
 export default function Tode(){
@@ -33,9 +34,9 @@ export default function Tode(){
 	}
 
 	return (
-		<div>
+		<div className="f-align{@bp}:c">
 			{todo.length > 0 ? gen(todo) : <h2>No Todo</h2>}
-			<input type="text" onChange={textChange} value={text}/>
+			<input className="f-align{@bp}:c input" type="text" onChange={textChange} value={text}/>
 			<button onClick={onAdd}>Add</button>
 		</div>
 	)

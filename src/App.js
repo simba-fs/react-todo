@@ -1,12 +1,13 @@
 import React from 'react';
 
 import './app.css';
+import Nav from './nav';
 import Todo from './todo';
 
 export default function App(){
 	return (
 		<div className="container">
-			<h1>React Todo</h1>
+			<Nav />
 			<Todo />
 		</div>
 	)

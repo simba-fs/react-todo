@@ -6,6 +6,28 @@ import Task from './task';
 export default function Tode(props){
 	const [todo, setTodo] = React.useState([]);
 	const [text, setText] = React.useState('');
+	const [reRender, render] = React.useState(0);
+
+	// load data from localStorage
+	React.useEffect(() => {
+		let data = JSON.parse(localStorage.getItem('todo-data'));
+		if(data){
+			setText(data.text);
+			setTodo(data.todo);
+		}else{
+			setText('');
+			setTodo([]);
+		}
+	}, [reRender]);
+
+	// save todo to localStorage
+	React.useEffect(() => {
+		localStorage.setItem('todo-data', JSON.stringify({
+			todo,
+			text
+		}));
+	}, [todo, text]);
+
 	/*
 	const [isChecked, setChecked] = React.useState([]);
 
@@ -30,7 +52,7 @@ export default function Tode(props){
 		setText('');
 	}
 
-//	const gen = (todo) => todo.map(i => <Task index={i.index} text={i.text} remove={() => remove(i.index)} check={onCheck} />);
+	//	const gen = (todo) => todo.map(i => <Task index={i.index} text={i.text} remove={() => remove(i.index)} check={onCheck} />);
 	const gen = (todo) => todo.map(i => <Task index={i.index} text={i.text} remove={() => remove(i.index)} />);
 
 	function remove(e){
@@ -43,7 +65,7 @@ export default function Tode(props){
 				}))
 			)
 		}
-			/*
+		/*
 		else if(Array.isArray(e)){
 		console.log(e);
 			for(let j in e) setTodo(todo
@@ -61,6 +83,11 @@ export default function Tode(props){
 		setText(e.target.value);
 	}
 
+	function clearAll(){
+		localStorage.removeItem('todo-data');
+		render(reRender + 1);
+	}
+
 	return (
 		<div className="container">
 			<div className="container list f-row f-align:c">
@@ -73,15 +100,18 @@ export default function Tode(props){
 					</div>
 
 				): null*/}
-			</div>
-			<form onSubmit={onAdd}>
-				<div className="input-grp">
-					<input className="input" type="text" onChange={textChange} value={text}/>
-					<span className="input-btn">
-						<button className="btn" onClick={onAdd}>Add</button>
-					</span>
 				</div>
-			</form>
-		</div>
+				<form onSubmit={onAdd}>
+					<div className="input-grp">
+						<input className="input" type="text" onChange={textChange} value={text} tabIndex="1"/>
+						<span className="input-btn">
+							<button className="btn" onClick={onAdd}>Add</button>
+						</span>
+						<span className="input-btn">
+							<button className="btn" onClick={clearAll}>Clear All</button>
+						</span>
+					</div>
+				</form>
+			</div>
 	)
 }
